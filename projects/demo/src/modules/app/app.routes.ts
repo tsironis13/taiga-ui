@@ -2070,6 +2070,7 @@ export const ROUTES: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(ROUTES, {
+            enableTracing: true,
             scrollPositionRestoration: 'enabled',
             anchorScrolling: 'enabled',
             scrollOffset: [0, 64],

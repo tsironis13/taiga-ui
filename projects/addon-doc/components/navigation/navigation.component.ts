@@ -232,7 +232,7 @@ export class TuiDocNavigationComponent {
         target.style.display = 'none';
         target.style.position = 'absolute';
         this.doc.body.appendChild(target);
-        target.click();
+        // target.click();
         target.remove();
     }
 }

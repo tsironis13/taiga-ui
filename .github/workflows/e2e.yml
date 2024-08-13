@@ -1,6 +1,7 @@
 name: ⚙️ E2E tests
-on:
-  pull_request:
+on: # debug only, revert before merge
+  push:
+    branches: [never]
 
 env:
   CYPRESS_failOnSnapshotDiff: 0

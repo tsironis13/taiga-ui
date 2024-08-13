@@ -1,6 +1,6 @@
 name: ⚙️ Lint
 on:
-  pull_request:
+  # debug only, revert before merge
   push:
     branches: [main]
 
