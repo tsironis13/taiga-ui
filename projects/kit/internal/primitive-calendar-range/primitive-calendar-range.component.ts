@@ -5,6 +5,7 @@ import {
     EventEmitter,
     Inject,
     Input,
+    OnChanges,
     OnInit,
     Optional,
     Output,
@@ -37,7 +38,7 @@ import {takeUntil} from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TuiDestroyService],
 })
-export class TuiPrimitiveCalendarRangeComponent implements OnInit {
+export class TuiPrimitiveCalendarRangeComponent implements OnInit, OnChanges {
     @Input()
     disabledItemHandler: TuiBooleanHandler<TuiDay> = ALWAYS_FALSE_HANDLER;
 
@@ -98,6 +99,10 @@ export class TuiPrimitiveCalendarRangeComponent implements OnInit {
 
     monthOffset: TuiTypedMapper<[TuiMonth, number], TuiMonth> = (value, offset) =>
         value.append({month: offset});
+
+    ngOnChanges(): void {
+        this.setInitialMonths();
+    }
 
     ngOnInit(): void {
         this.setInitialMonths();
