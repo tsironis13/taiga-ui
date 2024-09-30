@@ -2,10 +2,12 @@ import type {Provider} from '@angular/core';
 import {tuiCreateToken, tuiProvideOptions} from '@taiga-ui/cdk/utils/miscellaneous';
 
 export interface TuiScrollbarOptions {
+    nativeScrollbar: boolean;
     mode: 'always' | 'hover';
 }
 
 export const TUI_DEFAULT_SCROLLBAR_OPTIONS: TuiScrollbarOptions = {
+    nativeScrollbar: false,
     mode: 'always',
 };
 

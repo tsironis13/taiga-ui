@@ -3,11 +3,10 @@ import {
     CdkVirtualForOf,
     CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {NgIf} from '@angular/common';
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {changeDetection} from '@demo/emulate/change-detection';
 import {encapsulation} from '@demo/emulate/encapsulation';
-import {TuiScrollable, TuiScrollbar} from '@taiga-ui/core';
+import {TUI_SCROLLBAR_OPTIONS, TuiScrollable, TuiScrollbar} from '@taiga-ui/core';
 import {TuiLineClamp} from '@taiga-ui/kit';
 
 @Component({
@@ -16,7 +15,6 @@ import {TuiLineClamp} from '@taiga-ui/kit';
         CdkFixedSizeVirtualScroll,
         CdkVirtualForOf,
         CdkVirtualScrollViewport,
-        NgIf,
         TuiLineClamp,
         TuiScrollable,
         TuiScrollbar,
@@ -201,6 +199,8 @@ export default class Example {
         'Vortex',
         'Paradox',
     ];
+
+    protected readonly nativeScrollbar = inject(TUI_SCROLLBAR_OPTIONS).nativeScrollbar;
 
     protected readonly users = Array.from(new Array(10_000), (_, index) => {
         const firstName = this.names[Math.floor(Math.random() * this.names.length)] ?? '';

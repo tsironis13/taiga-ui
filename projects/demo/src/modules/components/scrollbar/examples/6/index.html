@@ -9,7 +9,8 @@
         appendOnly
         itemSize="50"
         tuiScrollable
-        class="example-viewport tui-zero-scrollbar"
+        class="example-viewport"
+        [class.tui-zero-scrollbar]="!nativeScrollbar"
     >
         <div
             *cdkVirtualFor="let item of items"

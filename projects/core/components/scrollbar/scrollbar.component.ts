@@ -38,7 +38,7 @@ export const TUI_SCROLLABLE = 'tui-scrollable';
         },
     ],
     host: {
-        '[class._native-hidden]': '!isIOS || hidden',
+        '[class._native-hidden]': '!options.nativeScrollbar && (!isIOS || hidden)',
         [`(${TUI_SCROLLABLE}.stop)`]: 'scrollRef = $event.detail',
         [`(${TUI_SCROLL_INTO_VIEW}.stop)`]: 'scrollIntoView($event.detail)',
     },
@@ -54,7 +54,7 @@ export class TuiScrollbar {
     public hidden = false;
 
     protected get delegated(): boolean {
-        return this.scrollRef !== this.el;
+        return this.scrollRef !== this.el || this.options.nativeScrollbar;
     }
 
     protected get scrollRef(): HTMLElement {

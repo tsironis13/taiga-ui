@@ -3,7 +3,7 @@
         appendOnly
         itemSize="50"
         tuiScrollable
-        class="tui-zero-scrollbar"
+        [class.tui-zero-scrollbar]="!nativeScrollbar"
     >
         <div *cdkVirtualFor="let user of users; templateCacheSize: 0">
             <tui-line-clamp

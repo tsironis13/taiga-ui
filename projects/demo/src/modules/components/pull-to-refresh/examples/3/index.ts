@@ -3,7 +3,6 @@ import {
     CdkVirtualForOf,
     CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {NgForOf} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {changeDetection} from '@demo/emulate/change-detection';
 import {encapsulation} from '@demo/emulate/encapsulation';
@@ -14,7 +13,12 @@ import {
     TuiPullToRefresh,
 } from '@taiga-ui/addon-mobile';
 import {TUI_IS_ANDROID, TUI_IS_IOS} from '@taiga-ui/cdk';
-import {TuiAlertService, TuiButton, TuiScrollable, TuiScrollbar} from '@taiga-ui/core';
+import {
+    TUI_SCROLLBAR_OPTIONS,
+    TuiAlertService,
+    TuiScrollable,
+    TuiScrollbar,
+} from '@taiga-ui/core';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -23,8 +27,6 @@ import {Subject} from 'rxjs';
         CdkFixedSizeVirtualScroll,
         CdkVirtualForOf,
         CdkVirtualScrollViewport,
-        NgForOf,
-        TuiButton,
         TuiPullToRefresh,
         TuiScrollable,
         TuiScrollbar,
@@ -54,6 +56,8 @@ import {Subject} from 'rxjs';
 })
 export default class Example {
     private readonly alerts = inject(TuiAlertService);
+
+    protected readonly nativeScrollbar = inject(TUI_SCROLLBAR_OPTIONS).nativeScrollbar;
 
     protected items = Array.from({length: 10000}).map((_, i) => `Item #${i}`);
 

@@ -8,6 +8,7 @@ import {tuiToAnimationOptions} from '@taiga-ui/core/utils';
 import {distinctUntilChanged, map, startWith, throttleTime} from 'rxjs';
 
 import {TuiScrollbarDirective} from './scrollbar.directive';
+import {TUI_SCROLLBAR_OPTIONS} from './scrollbar.options';
 
 @Component({
     standalone: true,
@@ -21,7 +22,11 @@ import {TuiScrollbarDirective} from './scrollbar.directive';
 export class TuiScrollControls {
     private readonly scrollRef = inject(TUI_SCROLL_REF).nativeElement;
 
-    protected readonly options = tuiToAnimationOptions(inject(TUI_ANIMATIONS_SPEED));
+    protected readonly options = inject(TUI_SCROLLBAR_OPTIONS);
+    protected readonly animationOptions = tuiToAnimationOptions(
+        inject(TUI_ANIMATIONS_SPEED),
+    );
+
     protected readonly refresh$ = inject(WA_ANIMATION_FRAME).pipe(
         throttleTime(300, tuiZonefreeScheduler()),
         map(() => this.scrollbars),

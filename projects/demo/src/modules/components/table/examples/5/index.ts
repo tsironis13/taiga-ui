@@ -3,13 +3,13 @@ import {
     CdkVirtualForOf,
     CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {changeDetection} from '@demo/emulate/change-detection';
 import {encapsulation} from '@demo/emulate/encapsulation';
 import type {TuiComparator} from '@taiga-ui/addon-table';
 import {TuiTable} from '@taiga-ui/addon-table';
 import {TuiDay, tuiToInt} from '@taiga-ui/cdk';
-import {TuiScrollable, TuiScrollbar} from '@taiga-ui/core';
+import {TUI_SCROLLBAR_OPTIONS, TuiScrollable, TuiScrollbar} from '@taiga-ui/core';
 
 interface User {
     readonly dob: TuiDay;
@@ -75,6 +75,8 @@ function getAge({dob}: User): number {
     changeDetection,
 })
 export default class Example {
+    protected readonly nativeScrollbar = inject(TUI_SCROLLBAR_OPTIONS).nativeScrollbar;
+
     protected readonly data = DATA;
 
     protected readonly columns = ['name', 'dob', 'age'];
