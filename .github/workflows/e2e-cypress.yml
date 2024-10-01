@@ -22,12 +22,23 @@ jobs:
           path: ${{ env.CYPRESS_BASELINE_REPO }}
       - uses: taiga-family/ci/actions/setup/variables@v1.91.0
       - uses: taiga-family/ci/actions/setup/node@v1.91.0
-      - run: |
-          cd baseline
+
+      - name: Share node_modules between current and baseline repos
+        run: |
+          cp -r node_modules ${{ env.CYPRESS_BASELINE_REPO }}/node_modules
+          tree -d -L 1
+          tree -d ${{ env.CYPRESS_BASELINE_REPO }} -L 1
+
+      - name: Run tests for baseline repo
+        run: |
+          cd ${{ env.CYPRESS_BASELINE_REPO }}
           npx nx component-test demo-cypress
           cd ../
-          cp ${{ env.CYPRESS_BASELINE_REPO }}/${{ env.CYPRESS_BASELINE_SNAPSHOTS }} ${{ env.CYPRESS_BASELINE_SNAPSHOTS }}
-          npx nx component-test demo-cypress
+          mkdir -p ${{ env.CYPRESS_BASELINE_SNAPSHOTS }} && cp -r ${{ env.CYPRESS_BASELINE_REPO }}/${{env.CYPRESS_BASELINE_SNAPSHOTS }}/. ${{ env.CYPRESS_BASELINE_SNAPSHOTS }}
+
+      - name: Run tests for current repo
+        run: npx nx component-test demo-cypress --verbose
+
       - run: |
           npm install canvas
           npx ts-node ./scripts/visual-testing/combine-cypress-failed-screenshots.ts
@@ -36,7 +47,7 @@ jobs:
         continue-on-error: true
         run: tree ${{ env.CYPRESS_RESULTS_FOLDER }}  -L 1
 
-      - name: Upload artifacts / ${{ env.CYPRESS_SNAPSHOTS_ARTIFACTS_KEY }}
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4.4.0
         with:
           path: '${{ env.CYPRESS_RESULTS_FOLDER }}/**/*.diff.png'
