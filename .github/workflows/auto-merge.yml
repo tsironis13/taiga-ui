@@ -1,6 +1,7 @@
 name: 🤖 PR auto merge
 on:
-  pull_request:
+  push:
+    branches: [never]
 
 env:
   PR_JOBS_NAME: '[ "Build packages", "Firebase", "Lint", "Unit tests", "Component testing result", "E2E result" ]'

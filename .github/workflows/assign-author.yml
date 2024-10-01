@@ -1,6 +1,7 @@
 name: 🤖 PR author as an assignee
 on:
-  pull_request:
+  push:
+    branches: [never]
 
 jobs:
   assign:

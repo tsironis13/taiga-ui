@@ -1,6 +1,7 @@
 name: ⚙️ Playwright E2E testing
 on:
-  pull_request:
+  push:
+    branches: [never]
 
 jobs:
   build-demo:
